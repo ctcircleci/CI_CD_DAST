@@ -9,7 +9,7 @@ jobs:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: ubuntu-2204:2022.07.1
+      - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
@@ -17,9 +17,15 @@ jobs:
       - run:
           name: "Say hello"
           command: |
-            echo Hello, World!"
+            echo Hello, World!
             python -m pip install --upgrade pip 
-            pip install -r requirements.txt"
+            pip install -r requirements.txt
+            export Dynamic_Target=$(DYNAMIC_TARGET)
+            export JOB_NAME='$(system.teamProject)_ADO_yaml'
+            export VeraID=$(VERAID)
+            export VeraPW=$(VERAPW)
+            export Dynamic_User=$(DYNAMIC_USER)
+            export Dynamic_Pass=$(DYNAMIC_PASS)
             python create-or-update-da-scan.py
 
 # Invoke jobs via workflows
