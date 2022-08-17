@@ -20,6 +20,7 @@ jobs:
             echo Hello, World!
             python -m pip install --upgrade pip 
             pip install -r requirements.txt
+            echo $DYNAMIC_TARGET
             export Dynamic_Target=$DYNAMIC_TARGET
             export JOB_NAME='CircleCI_ADO_yaml'
             export VeraID=$VERAID
